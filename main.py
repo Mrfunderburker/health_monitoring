@@ -31,13 +31,35 @@ def run(filename: str) -> None:
         list[int], list[int], list[int]: You will return the maximums, averages, and stdevs (in this order).
     """  
     data = []
+    
+    file = open(filename)
+    for line in file:
+     data.append(line)
 
+    data = filter_nondigits(data)
+    data = filter_outliers(data)
     # open file and read into the `data` list
-    ...
-
+    (run("data/data1.txt"))
     # return all 3 lists
-    ...
+
+    maximums = window_max(data, 6)
+    fig, ax = plt.subplots()
+    ax.plot(maximums)
+    plt.savefig("images/maximums.png")
 
 
-if __name__ == "__main__":
-    run("data/data1.txt")
+    averages = window_average(data, 6)
+    fig,ax = plt.subplots()
+    ax.plot(averages)
+    plt.savefig("images/averages.png")
+
+
+    stdevs = window_stddev(data, 6)
+    fig,ax = plt.subplots()
+    ax.plot(stdevs)
+    plt.savefig("images/stdevs.png")
+
+
+    if __name__ == "__main__":
+     run("data/data1.txt")
+    return maximums, averages, stdevs

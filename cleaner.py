@@ -21,4 +21,19 @@ def filter_nondigits(data: list) -> list:
 
 
 def filter_outliers(data: list) -> list:
-    pass
+    """
+    Filter all strings from list that are not integers
+
+    Args:
+        data (list[str]): list of strings representing heart rate samples.
+            Might contain invalid or missing data.
+    Returns:
+        list[int]: list of integers, with all non-digit strings removed
+    """
+    flower = []
+    if len(data) == 0 or "":
+       return data
+    for rate in data:
+       if rate > 30 and rate < 250:
+           flower.append(rate)
+    return flower
