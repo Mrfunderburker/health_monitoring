@@ -31,17 +31,22 @@ def run(filename: str) -> None:
         list[int], list[int], list[int]: You will return the maximums, averages, and stdevs (in this order).
     """  
     data = []
-    
+
     file = open(filename)
     for line in file:
-     data.append(line)
-
+        data.append(line)
+    file.close
+    #Use `filter_nondigits` to clean the data and remove invalid entries. Use `filter_outliers` to remove unrealistic heart rate samples (<30 or >250).
     data = filter_nondigits(data)
     data = filter_outliers(data)
     # open file and read into the `data` list
-    (run("data/data1.txt"))
     # return all 3 lists
-
+    """Calculate rolling maximums, averages, and standard deviations using functions from `metrics.py`.
+        Save the plots to the `images/` folder:
+            - Rolling maximums -> 'images/maximums.png'
+            - Rolling averages -> 'images/averages.png'
+            - Rolling standard deviations -> 'images/stdevs.png'
+    """
     maximums = window_max(data, 6)
     fig, ax = plt.subplots()
     ax.plot(maximums)
@@ -49,17 +54,20 @@ def run(filename: str) -> None:
 
 
     averages = window_average(data, 6)
-    fig,ax = plt.subplots()
+    fig, ax = plt.subplots()
     ax.plot(averages)
     plt.savefig("images/averages.png")
 
 
     stdevs = window_stddev(data, 6)
-    fig,ax = plt.subplots()
+    fig, ax = plt.subplots()
     ax.plot(stdevs)
     plt.savefig("images/stdevs.png")
 
-
+    """
+    Returns:
+        list[int], list[int], list[int]: You will return the maximums, averages, and stdevs (in this order).
+    """
     if __name__ == "__main__":
      run("data/data1.txt")
     return maximums, averages, stdevs

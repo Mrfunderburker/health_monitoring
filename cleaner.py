@@ -8,16 +8,16 @@ def filter_nondigits(data: list) -> list:
     Returns:
         list[int]: list of integers, with all non-digit strings removed
     """
-    flower = []
+    nondigits = []
     if len(data) == 0 or "":
         return data
     for rate in data:
         rate = rate.strip()
         if rate.isdigit():
-            flower.append(int(rate))
+            nondigits.append(int(rate))
         else:
             rate = rate
-    return flower
+    return nondigits
 
 
 def filter_outliers(data: list) -> list:
@@ -26,14 +26,14 @@ def filter_outliers(data: list) -> list:
 
     Args:
         data (list[str]): list of strings representing heart rate samples.
-            Might contain invalid or missing data.
+            Might contain errors in data that can affect accuracy of data caused by outliers.
     Returns:
-        list[int]: list of integers, with all non-digit strings removed
+        list[int]: list of integers, with all outlier strings removed
     """
-    flower = []
+    outliers = []
     if len(data) == 0 or "":
        return data
     for rate in data:
        if rate > 30 and rate < 250:
-           flower.append(rate)
-    return flower
+           outliers.append(rate)
+    return outliers
